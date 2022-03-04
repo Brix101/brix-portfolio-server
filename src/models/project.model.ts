@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { UserDocument } from "./user.model";
 
+// TODO add projec link, code link,imageLink tags{tag1, tag2}
 export interface ProjectDocument extends mongoose.Document {
   user: UserDocument["_id"];
   name: String;
