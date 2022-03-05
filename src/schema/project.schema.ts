@@ -9,16 +9,22 @@ const payload = {
     description: string({
       required_error: "Description is required",
     }).min(120, "Description should be at least 120 Characters"),
-    link: string({
-      required_error: "Price is required",
+    projectLink: string({
+      required_error: "Code Link is required",
     }),
-    image: string({
+    codeLink: string({
+      required_error: "Code Link is required",
+    }),
+    imageLink: string({
       required_error: "Image is required",
     }),
-    tags: array<any>({ required_error: "Tag is required" }),
+    tags: object({
+      tag: string({
+        required_error: "projectId is required",
+      }),
+    }),
   }),
 };
-
 const params = {
   params: object({
     projectId: string({
