@@ -1,4 +1,4 @@
-import { object, string, array, TypeOf } from "zod";
+import { object, string, array, any, TypeOf } from "zod";
 import { tag } from "../models/project.model";
 
 const payload = {
@@ -15,7 +15,7 @@ const payload = {
     image: string({
       required_error: "Image is required",
     }),
-    tags: array({}),
+    tags: array<any>({ required_error: "Tag is required" }),
   }),
 };
 
