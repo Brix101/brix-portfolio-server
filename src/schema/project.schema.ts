@@ -1,4 +1,5 @@
-import { object, string, TypeOf } from "zod";
+import { object, string, array, TypeOf } from "zod";
+import { tag } from "../models/project.model";
 
 const payload = {
   body: object({
@@ -7,13 +8,14 @@ const payload = {
     }),
     description: string({
       required_error: "Description is required",
-    }),
+    }).min(120, "Description should be at least 120 Characters"),
     link: string({
       required_error: "Price is required",
     }),
     image: string({
       required_error: "Image is required",
     }),
+    tags: array({}),
   }),
 };
 
