@@ -2,12 +2,14 @@ import mongoose from "mongoose";
 
 // Todo Please update the skill model and add schema,services,controller and routes
 export interface SkillDocument extends mongoose.Document {
-  name: String;
+  title: String;
+  imageLink: String;
 }
 
 const skillSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    title: { type: String, required: true },
+    imageLink: { type: String, required: true },
   },
   {
     timestamps: true,
