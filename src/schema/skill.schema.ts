@@ -18,13 +18,22 @@ const params = {
   }),
 };
 
-export const createSkillSchema = object({ ...payload });
-export const updateSkillSchema = object({
+const createSkillSchema = object({ ...payload });
+const updateSkillSchema = object({
   ...payload,
   ...params,
 });
-export const getSkillSchema = object({ ...params });
+const getSkillSchema = object({ ...params });
 
-export type CreateSkillInput = TypeOf<typeof createSkillSchema>;
-export type GetSkillInput = TypeOf<typeof getSkillSchema>;
-export type UpdateSkillInput = TypeOf<typeof updateSkillSchema>;
+type CreateSkillInput = TypeOf<typeof createSkillSchema>;
+type GetSkillInput = TypeOf<typeof getSkillSchema>;
+type UpdateSkillInput = TypeOf<typeof updateSkillSchema>;
+
+export {
+  createSkillSchema,
+  updateSkillSchema,
+  getSkillSchema,
+  CreateSkillInput,
+  GetSkillInput,
+  UpdateSkillInput,
+};

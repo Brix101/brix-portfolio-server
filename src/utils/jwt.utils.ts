@@ -4,14 +4,14 @@ import config from "config";
 const publicKey = config.get<string>("publicKey");
 const privateKey = config.get<string>("privateKey");
 
-export function signJwt(object: Object, options?: jwt.SignOptions | undefined) {
+const signJwt = (object: Object, options?: jwt.SignOptions | undefined) => {
   return jwt.sign(object, privateKey, {
     ...(options && options),
     algorithm: "RS256",
   });
-}
+};
 
-export function verifyJwt(token: string) {
+const verifyJwt = (token: string) => {
   try {
     const decoded = jwt.verify(token, publicKey);
     return {
@@ -26,4 +26,6 @@ export function verifyJwt(token: string) {
       decoded: null,
     };
   }
-}
+};
+
+export { signJwt, verifyJwt };

@@ -6,7 +6,7 @@ import {
 } from "mongoose";
 import SkillModel, { SkillDocument } from "../models/skill.model";
 
-export const createSkill = async (input: DocumentDefinition<SkillDocument>) => {
+const createSkill = async (input: DocumentDefinition<SkillDocument>) => {
   try {
     return await SkillModel.create(input);
   } catch (error: any) {
@@ -14,16 +14,16 @@ export const createSkill = async (input: DocumentDefinition<SkillDocument>) => {
   }
 };
 
-export const getAllSkill = async () => {
+const getAllSkill = async () => {
   return SkillModel.find();
 };
-export const findSkill = async (
+const findSkill = async (
   query: FilterQuery<SkillDocument>,
   options: QueryOptions = { lean: true }
 ) => {
   return SkillModel.findOne(query, {}, options);
 };
-export const updateSkill = async (
+const updateSkill = async (
   query: FilterQuery<SkillDocument>,
   update: UpdateQuery<SkillDocument>,
   options: QueryOptions
@@ -31,6 +31,8 @@ export const updateSkill = async (
   return SkillModel.findOne(query, update, options);
 };
 
-export const deleteSkill = async (query: FilterQuery<SkillDocument>) => {
+const deleteSkill = async (query: FilterQuery<SkillDocument>) => {
   return SkillModel.deleteOne(query);
 };
+
+export { createSkill, getAllSkill, findSkill, updateSkill, deleteSkill };

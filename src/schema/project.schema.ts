@@ -33,15 +33,24 @@ const params = {
   }),
 };
 
-export const createProjectSchema = object({ ...payload });
+const createProjectSchema = object({ ...payload });
 
-export const updateProjectSchema = object({
+const updateProjectSchema = object({
   ...payload,
   ...params,
 });
 
-export const getProjectSchema = object({ ...params });
+const getProjectSchema = object({ ...params });
 
-export type CreateProjectInput = TypeOf<typeof createProjectSchema>;
-export type GetProjectInput = TypeOf<typeof getProjectSchema>;
-export type UpdateProjectInput = TypeOf<typeof updateProjectSchema>;
+type CreateProjectInput = TypeOf<typeof createProjectSchema>;
+type GetProjectInput = TypeOf<typeof getProjectSchema>;
+type UpdateProjectInput = TypeOf<typeof updateProjectSchema>;
+
+export {
+  createProjectSchema,
+  updateProjectSchema,
+  getProjectSchema,
+  CreateProjectInput,
+  GetProjectInput,
+  UpdateProjectInput,
+};

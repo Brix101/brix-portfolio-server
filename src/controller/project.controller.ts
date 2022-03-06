@@ -13,11 +13,10 @@ import {
 } from "../service/project.service";
 import logger from "../utils/logger";
 
-//params, responsebody,req input body
-export async function createProjectHandler(
+const createProjectHandler = async (
   req: Request<{}, {}, CreateProjectInput["body"]>,
   res: Response
-) {
+) => {
   try {
     const userId = res.locals.user._id;
     const body = req.body;
@@ -28,17 +27,17 @@ export async function createProjectHandler(
     logger.error(error);
     return res.status(409).send(error.message);
   }
-}
+};
 
-export async function getAllProjectHandler(req: Request, res: Response) {
+const getAllProjectHandler = async (req: Request, res: Response) => {
   const project = await getAllProject();
   return res.send(project);
-}
+};
 
-export async function getProjectHandler(
+const getProjectHandler = async (
   req: Request<GetProjectInput["params"]>,
   res: Response
-) {
+) => {
   const projectId = req.params.projectId;
 
   const project = await findProject({ projectId });
@@ -48,12 +47,12 @@ export async function getProjectHandler(
   }
 
   return res.send(project);
-}
+};
 
-export async function updateProjectHandler(
+const updateProjectHandler = async (
   req: Request<UpdateProjectInput["params"]>,
   res: Response
-) {
+) => {
   const userId = res.locals.user._id;
   const projectId = req.params.projectId;
   const update = req.body;
@@ -77,12 +76,12 @@ export async function updateProjectHandler(
     logger.error(error);
     return res.status(409).send(error.message);
   }
-}
+};
 
-export async function deleteProjectHandler(
+const deleteProjectHandler = async (
   req: Request<GetProjectInput["params"]>,
   res: Response
-) {
+) => {
   const userId = res.locals.user._id;
   const projectId = req.params.projectId;
   const project = await findProject({ projectId });
@@ -102,4 +101,12 @@ export async function deleteProjectHandler(
     logger.error(error);
     res.status(409).send(error.message);
   }
-}
+};
+
+export {
+  createProjectHandler,
+  getAllProjectHandler,
+  getProjectHandler,
+  updateProjectHandler,
+  deleteProjectHandler,
+};

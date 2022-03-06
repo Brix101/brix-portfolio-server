@@ -6,7 +6,7 @@ import {
 } from "mongoose";
 import ProjectModel, { ProjectDocument } from "../models/project.model";
 
-export const createProject = async (
+const createProject = async (
   input: DocumentDefinition<Omit<ProjectDocument, "createdAt" | "updatedAt">>
 ) => {
   try {
@@ -15,22 +15,30 @@ export const createProject = async (
     throw new Error(error);
   }
 };
-export const getAllProject = async () => {
+const getAllProject = async () => {
   return ProjectModel.find();
 };
-export const findProject = async (
+const findProject = async (
   query: FilterQuery<ProjectDocument>,
   options: QueryOptions = { lean: true }
 ) => {
   return ProjectModel.findOne(query, {}, options);
 };
-export const updateProject = async (
+const updateProject = async (
   query: FilterQuery<ProjectDocument>,
   update: UpdateQuery<ProjectDocument>,
   options: QueryOptions
 ) => {
   return ProjectModel.findOne(query, update, options);
 };
-export const deleteProject = async (query: FilterQuery<ProjectDocument>) => {
+const deleteProject = async (query: FilterQuery<ProjectDocument>) => {
   return ProjectModel.deleteOne(query);
+};
+
+export {
+  createProject,
+  getAllProject,
+  findProject,
+  updateProject,
+  deleteProject,
 };

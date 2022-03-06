@@ -8,7 +8,7 @@ import { signJwt } from "../utils/jwt.utils";
 import { validatePassword } from "./user.controller";
 import config from "config";
 
-export async function createUserSessionHandler(req: Request, res: Response) {
+const createUserSessionHandler = async (req: Request, res: Response) => {
   // Validate the user's password
   const user = await validatePassword(req.body);
 
@@ -45,20 +45,20 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   });
 
   return res.send({ user: true });
-}
-export async function getUserSessionHandler(req: Request, res: Response) {
+};
+const getUserSessionHandler = async (req: Request, res: Response) => {
   const userId = res.locals.user._id;
 
   const sessions = await findSessions({ user: userId, valid: true });
 
   return res.send(sessions);
-}
+};
 
-export async function isUserSessionHandler(req: Request, res: Response) {
+const isUserSessionHandler = async (req: Request, res: Response) => {
   return res.send({ user: true });
-}
+};
 
-export async function deleteSessionHandler(req: Request, res: Response) {
+const deleteSessionHandler = async (req: Request, res: Response) => {
   const sessionId = res.locals.user.session;
 
   await updateSession({ _id: sessionId }, { valid: false });
@@ -76,4 +76,11 @@ export async function deleteSessionHandler(req: Request, res: Response) {
   });
 
   return res.send({ user: false });
-}
+};
+
+export {
+  createUserSessionHandler,
+  getUserSessionHandler,
+  isUserSessionHandler,
+  deleteSessionHandler,
+};
