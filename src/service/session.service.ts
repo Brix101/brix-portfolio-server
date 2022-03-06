@@ -8,7 +8,7 @@ import { findUser } from "./user.service";
 interface refreshToken {
   refreshToken: string;
 }
-
+// TODO move and create session on usermodel
 const createSession = async (userId: String, userAgent: String) => {
   const session = await SessionModel.create({
     user: userId,
@@ -50,4 +50,4 @@ const reIssueAccessToken = async ({ refreshToken }: refreshToken) => {
   return accessToken;
 };
 
-export { createSession, findSessions, reIssueAccessToken };
+export { createSession, findSessions, updateSession, reIssueAccessToken };
