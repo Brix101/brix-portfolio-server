@@ -6,7 +6,8 @@ import userRoutes from "./user.route";
 
 function routes(app: Express) {
   app.get("/", (req: Request, res: Response) => {
-    res.status(200).send("Hello Cloud");
+    const userAgent = req.get("user-agent") || "";
+    res.status(200).send(`Hello ${userAgent} user`);
   });
 
   projectRoutes(app);
