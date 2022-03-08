@@ -18,11 +18,6 @@ const payload = {
     imageLink: string({
       required_error: "Image is required",
     }),
-    tags: object({
-      tag: string({
-        required_error: "projectId is required",
-      }),
-    }),
   }),
 };
 const params = {

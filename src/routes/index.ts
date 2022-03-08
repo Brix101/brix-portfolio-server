@@ -1,4 +1,5 @@
 import { Request, Response, Express } from "express";
+import MessageRoutes from "./message.route";
 import projectRoutes from "./project.route";
 import sessionRoutes from "./session.route";
 import skillRoutes from "./skill.route";
@@ -10,6 +11,7 @@ function routes(app: Express) {
     res.status(200).send(`Hello ${userAgent} user`);
   });
 
+  MessageRoutes(app);
   projectRoutes(app);
   sessionRoutes(app);
   skillRoutes(app);
