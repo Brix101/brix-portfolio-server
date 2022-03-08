@@ -3,13 +3,11 @@ import {
   createMessageHandler,
   deleteMessageHandler,
   getAllMessageHandler,
-  updateMessageHandler,
 } from "../controller/message.controller";
 import { requireUser, validate } from "../middleware";
 import {
   createMessageSchema,
   getMessageSchema,
-  updateMessageSchema,
 } from "../schema/message.schema";
 
 function MessageRoutes(app: Express) {
@@ -19,11 +17,6 @@ function MessageRoutes(app: Express) {
     createMessageHandler
   );
   app.get("/api/messages", requireUser, getAllMessageHandler);
-  app.put(
-    "/api/message/:messageId",
-    [requireUser, validate(updateMessageSchema)],
-    updateMessageHandler
-  );
 
   app.delete(
     "/api/message/:message",

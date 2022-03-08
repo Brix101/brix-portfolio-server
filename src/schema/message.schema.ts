@@ -25,21 +25,14 @@ const params = {
 };
 
 const createMessageSchema = object({ ...payload });
-const updateMessageSchema = object({
-  ...payload,
-  ...params,
-});
 const getMessageSchema = object({ ...params });
 
 type CreateMessageInput = TypeOf<typeof createMessageSchema>;
 type GetMessageInput = TypeOf<typeof getMessageSchema>;
-type UpdateMessageInput = TypeOf<typeof updateMessageSchema>;
 
 export {
   createMessageSchema,
-  updateMessageSchema,
   getMessageSchema,
   CreateMessageInput,
   GetMessageInput,
-  UpdateMessageInput,
 };

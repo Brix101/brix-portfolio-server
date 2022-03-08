@@ -25,22 +25,9 @@ const findMessage = async (
 ) => {
   return MessageModel.findOne(query, {}, options);
 };
-const updateMessage = async (
-  query: FilterQuery<MessageDocument>,
-  update: UpdateQuery<MessageDocument>,
-  options: QueryOptions
-) => {
-  return MessageModel.findOne(query, update, options);
-};
 
 const deleteMessage = async (query: FilterQuery<MessageDocument>) => {
   return MessageModel.deleteOne(query);
 };
 
-export {
-  createMessage,
-  getAllMessage,
-  findMessage,
-  updateMessage,
-  deleteMessage,
-};
+export { createMessage, getAllMessage, findMessage, deleteMessage };

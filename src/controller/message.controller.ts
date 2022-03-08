@@ -1,16 +1,11 @@
 import { Request, Response } from "express";
 import logger from "../utils/logger";
-import {
-  CreateMessageInput,
-  GetMessageInput,
-  UpdateMessageInput,
-} from "../schema/message.schema";
+import { CreateMessageInput, GetMessageInput } from "../schema/message.schema";
 import {
   createMessage,
   deleteMessage,
   findMessage,
   getAllMessage,
-  updateMessage,
 } from "../service/message.service";
 
 const createMessageHandler = async (
@@ -30,30 +25,6 @@ const createMessageHandler = async (
 const getAllMessageHandler = async (req: Request, res: Response) => {
   const Message = await getAllMessage();
   return res.send(Message);
-};
-
-const updateMessageHandler = async (
-  req: Request<UpdateMessageInput["params"]>,
-  res: Response
-) => {
-  const messageId = req.params.messageId;
-  const update = req.body;
-
-  const message = await findMessage({ messageId });
-
-  if (!message) {
-    return res.sendStatus(404);
-  }
-
-  try {
-    const updatedMessage = await updateMessage({ messageId }, update, {
-      new: true,
-    });
-    return updatedMessage;
-  } catch (error: any) {
-    logger.error(error);
-    return res.status(409).send(error.message);
-  }
 };
 
 const deleteMessageHandler = async (
@@ -76,9 +47,4 @@ const deleteMessageHandler = async (
   }
 };
 
-export {
-  createMessageHandler,
-  getAllMessageHandler,
-  updateMessageHandler,
-  deleteMessageHandler,
-};
+export { createMessageHandler, getAllMessageHandler, deleteMessageHandler };
