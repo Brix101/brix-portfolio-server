@@ -3,6 +3,7 @@ import {
   createProjectHandler,
   deleteProjectHandler,
   getAllProjectHandler,
+  getAllProjectByTagHandler,
   getProjectHandler,
   updateProjectHandler,
 } from "../controller/project.controller";
@@ -12,6 +13,7 @@ import {
   getProjectSchema,
   updateProjectSchema,
 } from "../schema/project.schema";
+import { getTagSchema } from "../schema/tag.schema";
 
 function projectRoutes(app: Express) {
   app.post(
@@ -20,6 +22,11 @@ function projectRoutes(app: Express) {
     createProjectHandler
   );
   app.get("/api/projects/:projectId", getProjectHandler);
+  app.get(
+    "/api/projects-by-tag",
+    validate(getTagSchema),
+    getAllProjectByTagHandler
+  );
   app.get("/api/projects", getAllProjectHandler);
 
   app.put(

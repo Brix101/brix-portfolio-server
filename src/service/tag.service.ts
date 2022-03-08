@@ -23,6 +23,12 @@ const findTag = async (
 ) => {
   return TagModel.findOne(query, {}, options);
 };
+const findAllTag = async (
+  query: FilterQuery<TagDocument>,
+  options: QueryOptions = { lean: true }
+) => {
+  return TagModel.find(query, {}, options);
+};
 const updateTag = async (
   query: FilterQuery<TagDocument>,
   update: UpdateQuery<TagDocument>,
@@ -35,4 +41,4 @@ const deleteTag = async (query: FilterQuery<TagDocument>) => {
   return TagModel.deleteOne(query);
 };
 
-export { createTag, getAllTag, findTag, updateTag, deleteTag };
+export { createTag, getAllTag, findTag, findAllTag, updateTag, deleteTag };

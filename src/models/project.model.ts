@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { TagDocument } from "./tag.model";
 import { UserDocument } from "./user.model";
 
-// TODO add projec link, code link,imageLink tags{tag1, tag2}
 export interface tag {
   name: String;
 }
@@ -13,6 +12,7 @@ export interface ProjectDocument extends mongoose.Document {
   projectLink: String;
   codeLink: String;
   imageLink: String;
+  tags: [TagDocument];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -24,8 +24,10 @@ const projectSchema = new mongoose.Schema(
     description: { type: String, required: true },
     projectLink: { type: String },
     codeLink: { type: String },
-    image: { type: String, required: true },
-    tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
+    imageLink: { type: String, required: true },
+    tags: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Tag", nullable: true },
+    ],
   },
   {
     timestamps: true,

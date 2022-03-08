@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import ProjectModel from "../models/project.model";
+import TagModel from "../models/tag.model";
 import {
   CreateProjectInput,
   GetProjectInput,
@@ -11,6 +13,7 @@ import {
   deleteProject,
   getAllProject,
 } from "../service/project.service";
+import { findTag } from "../service/tag.service";
 import logger from "../utils/logger";
 
 const createProjectHandler = async (
@@ -20,7 +23,15 @@ const createProjectHandler = async (
   try {
     const userId = res.locals.user._id;
     const body = req.body;
-    const project = await createProject({ ...body, user: userId });
+    const tags = await TagModel.find({
+      _id: body.tags,
+    });
+
+    const project = await createProject({
+      ...body,
+      user: userId,
+      tags: tags,
+    });
 
     return res.send(project);
   } catch (error: any) {
@@ -31,6 +42,19 @@ const createProjectHandler = async (
 
 const getAllProjectHandler = async (req: Request, res: Response) => {
   const project = await getAllProject();
+  return res.send(project);
+};
+const getAllProjectByTagHandler = async (req: Request, res: Response) => {
+  const body = req.body;
+  const tag = await findTag({ name: body.tag });
+  if (!tag) {
+    return res.status(404).send("Tag Not Found");
+  }
+
+  const project = await ProjectModel.find({
+    tags: { _id: tag._id },
+  }).populate("tags");
+
   return res.send(project);
 };
 
@@ -107,6 +131,7 @@ export {
   createProjectHandler,
   getAllProjectHandler,
   getProjectHandler,
+  getAllProjectByTagHandler,
   updateProjectHandler,
   deleteProjectHandler,
 };

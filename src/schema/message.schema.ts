@@ -10,7 +10,7 @@ const payload = {
     }),
     email: string({
       required_error: "Email is Required",
-    }),
+    }).email("Not a valid email"),
     message: string({
       required_error: "Message Link is Required",
     }).min(120, "Message should be at least 120 characters"),

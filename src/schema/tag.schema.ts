@@ -20,7 +20,7 @@ const updateTagSchema = object({
   ...payload,
   ...params,
 });
-const getTagSchema = object({ ...params });
+const getTagSchema = object({ ...payload });
 
 type CreateTagInput = TypeOf<typeof createTagSchema>;
 type GetTagInput = TypeOf<typeof getTagSchema>;

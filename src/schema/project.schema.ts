@@ -1,5 +1,4 @@
-import { object, string, array, any, TypeOf } from "zod";
-import { tag } from "../models/project.model";
+import { object, string, TypeOf } from "zod";
 
 const payload = {
   body: object({
@@ -18,6 +17,7 @@ const payload = {
     imageLink: string({
       required_error: "Image is required",
     }),
+    tags: string().array(),
   }),
 };
 const params = {
