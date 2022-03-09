@@ -21,16 +21,20 @@ const updateTagSchema = object({
   ...params,
 });
 const getTagSchema = object({ ...payload });
+const deleteTagSchema = object({ ...params });
 
 type CreateTagInput = TypeOf<typeof createTagSchema>;
 type GetTagInput = TypeOf<typeof getTagSchema>;
 type UpdateTagInput = TypeOf<typeof updateTagSchema>;
+type DeleteTagInput = TypeOf<typeof deleteTagSchema>;
 
 export {
   createTagSchema,
   updateTagSchema,
   getTagSchema,
+  deleteTagSchema,
   CreateTagInput,
   GetTagInput,
   UpdateTagInput,
+  DeleteTagInput,
 };

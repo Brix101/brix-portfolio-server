@@ -41,7 +41,7 @@ const updateSkillHandler = async (
   const skill = await findSkill({ skillId });
 
   if (!skill) {
-    return res.sendStatus(404);
+    return res.status(404).send("Skill Not Found");
   }
 
   try {
@@ -63,7 +63,7 @@ const deleteSkillHandler = async (
   const skill = await findSkill({ skillId });
 
   if (!skill) {
-    return res.sendStatus(404);
+    return res.status(404).send("Skill Not Found");
   }
 
   try {

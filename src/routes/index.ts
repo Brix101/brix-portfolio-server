@@ -3,6 +3,7 @@ import MessageRoutes from "./message.route";
 import projectRoutes from "./project.route";
 import sessionRoutes from "./session.route";
 import skillRoutes from "./skill.route";
+import tagRoutes from "./tag.route";
 import userRoutes from "./user.route";
 
 function routes(app: Express) {
@@ -15,6 +16,7 @@ function routes(app: Express) {
   projectRoutes(app);
   sessionRoutes(app);
   skillRoutes(app);
+  tagRoutes(app);
   userRoutes(app);
 }
 

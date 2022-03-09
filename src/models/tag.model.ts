@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 export interface TagDocument extends mongoose.Document {
-  name: String;
+  tag: String;
 }
 
 const tagSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    tag: { type: String, required: true },
   },
   {
     timestamps: true,

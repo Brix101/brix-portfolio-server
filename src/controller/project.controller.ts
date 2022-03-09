@@ -24,7 +24,7 @@ const createProjectHandler = async (
     const userId = res.locals.user._id;
     const body = req.body;
     const tags = await TagModel.find({
-      _id: body.tags,
+      tag: body.tags,
     });
 
     const project = await createProject({
