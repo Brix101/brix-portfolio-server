@@ -10,6 +10,11 @@ interface loginInput {
   password: string;
 }
 
+interface message {
+  message: string;
+  user: any;
+}
+
 const createUserHandler = async (
   req: Request<{}, {}, CreateUserInput["body"]>,
   res: Response
@@ -27,14 +32,24 @@ const validatePassword = async ({ email, password }: loginInput) => {
   const user = await UserModel.findOne({ email });
 
   if (!user) {
-    return false;
+    const userMessage: message = { message: "Invalid Email", user: false };
+    return userMessage;
   }
 
   const isValid = await user.comparePassword(password);
 
-  if (!isValid) return false;
-
-  return omit(user.toJSON(), "password");
+  if (!isValid) {
+    const passwordMessage: message = {
+      message: "Invalid Password",
+      user: false,
+    };
+    return passwordMessage;
+  }
+  const successMessage: message = {
+    message: "",
+    user: omit(user.toJSON(), "password"),
+  };
+  return successMessage;
 };
 
 export { createUserHandler, validatePassword };

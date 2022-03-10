@@ -10,10 +10,10 @@ import config from "config";
 
 const createUserSessionHandler = async (req: Request, res: Response) => {
   // Validate the user's password
-  const user = await validatePassword(req.body);
+  const { message, user } = await validatePassword(req.body);
 
   if (!user) {
-    return res.status(401).send("Invalid email or password");
+    return res.status(401).send(message);
   }
 
   // create a session
