@@ -7,7 +7,7 @@ const payload = {
     }),
     description: string({
       required_error: "Description is required",
-    }).min(120, "Description should be at least 120 Characters"),
+    }).min(20, "Description should be at least 20 Characters"),
     projectLink: string({
       required_error: "Code Link is required",
     }),

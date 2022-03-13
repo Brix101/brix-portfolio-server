@@ -13,7 +13,7 @@ import {
   getProjectSchema,
   updateProjectSchema,
 } from "../schema/project.schema";
-import { getTagSchema } from "../schema/tag.schema";
+import { getTagbyIDSchema, getTagSchema } from "../schema/tag.schema";
 
 function projectRoutes(app: Express) {
   app.post(

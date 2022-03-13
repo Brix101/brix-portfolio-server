@@ -41,14 +41,25 @@ const createProjectHandler = async (
 };
 
 const getAllProjectHandler = async (req: Request, res: Response) => {
-  const project = await getAllProject();
+  const tagId = req.body;
+  const tag = await findTag({ tagId });
+  if (!tag) {
+    const project = await getAllProject();
+    return res.send(project);
+  }
+
+  const project = await ProjectModel.find({
+    tags: { _id: tag._id },
+  }).populate("tags");
+
   return res.send(project);
 };
 const getAllProjectByTagHandler = async (req: Request, res: Response) => {
   const body = req.body;
   const tag = await findTag({ name: body.tag });
   if (!tag) {
-    return res.status(404).send("Tag Not Found");
+    const project = await getAllProject();
+    return res.send(project);
   }
 
   const project = await ProjectModel.find({
